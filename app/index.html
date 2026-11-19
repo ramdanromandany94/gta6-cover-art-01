@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Sunset Cover Studio</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VS</span>
+    <div>
+      <h1>Vice Sunset Cover Studio</h1>
+      <p>Turn any photo into a multi-panel Vice City style cover. Offline, free, your photos never leave this machine.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="exportAll" type="button" class="primary">Export all 3 sizes</button>
+  </div>
+</header>
+<main class="app">
+  <section class="stage">
+    <canvas id="cover" width="1080" height="1080" aria-label="Cover preview"></canvas>
+    <p class="hint">Click a panel to select it, drag to move its photo, scroll to zoom. The cover updates live.</p>
+  </section>
+  <aside class="controls" aria-label="Cover controls">
+    <section>
+      <h2>1 · Layout</h2>
+      <div class="row" id="layouts" role="group" aria-label="Layout"></div>
+    </section>
+    <section>
+      <h2>2 · Photos</h2>
+      <div class="tray" id="tray"></div>
+      <label class="upload">Add your photos
+        <input id="uploads" type="file" accept="image/*" multiple>
+      </label>
+      <div id="panels"></div>
+    </section>
+    <section>
+      <h2>3 · Grade</h2>
+      <div class="row" id="grades" role="group" aria-label="Colour grade"></div>
+      <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="frame" type="checkbox" checked> White poster frame</label>
+    </section>
+    <section>
+      <h2>4 · Caption</h2>
+      <label>Title
+        <input id="title" type="text" maxlength="32" value="Sunset Heist">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="40" value="Vice City nights">
+      </label>
+    </section>
+    <section>
+      <h2>5 · Export PNG</h2>
+      <div class="row wrap" id="sizes" role="group" aria-label="Export size"></div>
+      <p id="status" role="status">Ready.</p>
+    </section>
+  </aside>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
