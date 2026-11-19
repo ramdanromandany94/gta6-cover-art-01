@@ -1,3 +1,8 @@
+// Vice Sunset Cover Studio — entry for make.fun gta6-cover-art-01.
+// A multi-panel GTA 6-style cover maker: arrange photos in 4 layouts, grade them with a
+// Vice City neon-sunset look, caption them, and export 1080x1080 / 1080x1350 / 1920x1080
+// PNGs. This file is the entrypoint: it copies app/ and screenshots/ beside this file to
+// /output and writes /output/dossier.json, the summary the judge reads.
 // A working gta6-cover-art-01 entry (Node 22, standard library only): the app is this directory's app/ folder, plain
 // static files a desktop browser loads offline (app/index.html and its ES modules, no library and no network
 // request), and the program hands it in. It copies app/ and screenshots/ from beside this file to /output and writes
@@ -11,7 +16,7 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-app.ts';
@@ -38,3 +43,10 @@ writeFileSync(
     app_path_max_bytes: 1000,
   }),
 );
+
+// Build summary for the log: how many screenshots went in and where the dossier landed,
+// so a run's result is visible without opening /output.
+const shotNames = existsSync(join(here, 'screenshots'))
+  ? readdirSync(join(here, 'screenshots')).filter((f) => /\.(png|jpe?g)$/i.test(f)).sort()
+  : [];
+console.log(`Vice Sunset Cover Studio: ${shotNames.length} screenshot(s), cover ${shotNames[0] ?? 'none'} -> ${join(out, 'dossier.json')}`);
